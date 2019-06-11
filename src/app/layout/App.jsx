@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import CleanupDashboard from '../../features/cleanup/cleanupDashboard/CleanupDashboard';
+import NavBar from '../../features/nav/navBar/NavBar';
+import { Container } from 'semantic-ui-react';
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <h1>Cleanup</h1>
-        <CleanupDashboard />
-      </div>
+      <Fragment>
+        <NavBar />
+        <Container className="main">
+          <CleanupDashboard />
+        </Container>
+      </Fragment>
     );
   }
 }
