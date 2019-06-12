@@ -11,9 +11,9 @@ class NavBar extends Component {
                             <img src="assets/logo_white.png" alt="logo" />
                             Cleanup
                           </Menu.Item>
-                        <Menu.Item name="Cleanups" />
+                        <Menu.Item name="View All" />
                         <Menu.Item>
-                            <Button floated="right" positive inverted content="Create Cleanup" />
+                            <Button basic inverted floated="right" content="Create Cleanup" />
                         </Menu.Item>
                         <Menu.Item position="right">
                             <Button basic inverted content="Login" />
