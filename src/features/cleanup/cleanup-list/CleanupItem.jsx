@@ -12,9 +12,9 @@ class CleanupItem extends Component {
                         <Item>
                             <Item.Image size="tiny" circular src={cleanup.hostPhotoURL} />
                             <Item.Content>
-                                <Item.Header as="a">{cleanup.title}</Item.Header>
+                                <Item.Header>{cleanup.title}</Item.Header>
                                 <Item.Description>
-                                    Hosted by <a>{cleanup.hostedBy}</a>
+                                    Hosted by {cleanup.hostedBy}
                                 </Item.Description>
                             </Item.Content>
                         </Item>
@@ -28,7 +28,7 @@ class CleanupItem extends Component {
                 </Segment>
                 <Segment secondary>
                     <List horizontal>
-                        {cleanup.attendees.map(attendee => (
+                        {cleanup.attendees && cleanup.attendees.map(attendee => (
                             <CleanupAttendee key={attendee.id} attendee={attendee} />
                         ))}
                     </List>
