@@ -8,7 +8,7 @@ const cleanups = [
   {
     id: '1',
     title: 'Trip to Tower of London',
-    date: '2018-03-27T11:00:00+00:00',
+    date: '2018-03-27',
     category: 'culture',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -32,7 +32,7 @@ const cleanups = [
   {
     id: '2',
     title: 'Trip to Punch and Judy Pub',
-    date: '2018-03-28T14:00:00+00:00',
+    date: '2018-03-28',
     category: 'drinks',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -58,13 +58,27 @@ const cleanups = [
 class CleanupDashboard extends Component {
   state = {
     cleanups: cleanups,
-    isOpen: false
+    isOpen: false,
+    selectedCleanup: null
   }
 
-  toggleIsOpen = () => {
-    this.setState(({ isOpen }) => ({
-      isOpen: !isOpen
-    }))
+  // toggleIsOpen = () => {
+  //   this.setState(({ isOpen }) => ({
+  //     isOpen: !isOpen
+  //   }))
+  // }
+
+  handleOpenCleanupForm = () => {
+    this.setState({
+      isOpen: true,
+      selectedCleanup: null
+    })
+  }
+
+  handleCloseCleanupForm = () => {
+    this.setState({
+      isOpen: false
+    })
   }
 
   handleCreateCleanup = (newCleanup) => {
@@ -76,23 +90,57 @@ class CleanupDashboard extends Component {
     }))
   }
 
+  handledSelectCleanup = (cleanup) => {
+    this.setState({
+      selectedCleanup: cleanup,
+      isOpen: true
+    })
+  }
+
+  handleUpdateCleanup = (updatedCleanup) => {
+    this.setState(({ cleanups }) => ({
+      cleanups: cleanups.map(cleanup => {
+        if (cleanup.id === updatedCleanup.id) {
+          return { ...updatedCleanup }
+        } else {
+          return cleanup
+        }
+      }),
+      isOpen: false,
+      selectedCleanup: null
+    }))
+  }
+
+  handleDeleteCleanup = (id) => {
+    this.setState(({cleanups}) => ({
+      cleanups: cleanups.filter(cleanup => cleanup.id !==id)
+    }))
+  }
+
   render() {
-    const { cleanups, isOpen } = this.state
+    const { cleanups, isOpen, selectedCleanup } = this.state
     return (
       <Grid>
         <Grid.Column width={10}>
-          <CleanupList cleanups={cleanups} />
+          <CleanupList
+            cleanups={cleanups}
+            selectCleanup={this.handleSelectCleanup}
+            deleteCleanup={this.handleDeleteCleanup}
+          />
         </Grid.Column>
         <Grid.Column width={6}>
           <Button
-            onClick={this.toggleIsOpen}
+            onClick={this.handleOpenCleanupForm}
             positive
             content="Create Cleanup"
           />
           {isOpen && (
             <CleanupForm
+              key={selectedCleanup ? selectedCleanup.id : 0}
+              selectedCleanup={selectedCleanup}
+              updateCleanup={this.handleUpdateCleanup}
               createCleanup={this.handleCreateCleanup}
-              cancelForm={this.toggleIsOpen} />
+              cancelForm={this.handleCloseCleanupForm} />
           )}
         </Grid.Column>
       </Grid>

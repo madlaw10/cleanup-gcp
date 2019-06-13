@@ -4,7 +4,7 @@ import CleanupAttendee from './CleanupAttendee';
 
 class CleanupItem extends Component {
     render() {
-        const {cleanup} = this.props;
+        const { cleanup, selectCleanup, deleteCleanup } = this.props;
         return (
             <Segment.Group>
                 <Segment>
@@ -24,7 +24,7 @@ class CleanupItem extends Component {
                     <span>
                         <Icon name="clock" /> {cleanup.date} |
                         <Icon name="marker" /> {cleanup.venue}
-                      </span>
+                    </span>
                 </Segment>
                 <Segment secondary>
                     <List horizontal>
@@ -35,7 +35,18 @@ class CleanupItem extends Component {
                 </Segment>
                 <Segment clearing>
                     <span>{cleanup.description}</span>
-                    <Button as="a" color="green" floated="right" content="View" />
+                    <Button
+                        onClick={() => deleteCleanup(cleanup.id)}
+                        color="red"
+                        floated="right"
+                        content="Delete"
+                    />
+                    <Button
+                        onClick={() => selectCleanup(cleanup)}
+                        color="green"
+                        floated="right"
+                        content="View"
+                    />
                 </Segment>
             </Segment.Group>
         )

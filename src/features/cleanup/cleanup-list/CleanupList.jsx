@@ -3,10 +3,16 @@ import CleanupItem from './CleanupItem'
 
 class CleanupList extends Component {
     render() {
+        const { cleanups, selectCleanup, deleteCleanup } = this.props;
         return (
             <Fragment>
-                {this.props.cleanups.map(cleanup => (
-                    <CleanupItem key={cleanup.id} cleanup={cleanup} />
+                {cleanups.map(cleanup => (
+                    <CleanupItem
+                        key={cleanup.id}
+                        cleanup={cleanup}
+                        selectCleanup={selectCleanup}
+                        deleteCleanup={deleteCleanup}
+                    />
                 ))}
             </Fragment>
         )

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Form, Segment, Button } from 'semantic-ui-react';
 
 class CleanupForm extends Component {
-
   state = {
     title: '',
     date: '',
@@ -11,12 +10,25 @@ class CleanupForm extends Component {
     hostedBy: ''
   }
 
-  handleFormSubmit = (evt) => {
-    evt.preventDefault();
-    this.props.createCleanup(this.state);
+  componentDidMount() {
+    if (this.props.selectedCleanup !== null) {
+      this.setState({
+        ...this.props.selectedCleanup
+      })
+    }
   }
 
-  handleInputChange = ({ target: { name, value } }) => {
+  submitForm = (evt) => {
+    evt.preventDefault();
+    if (this.state.id) {
+      this.props.updateCleanup(this.state)
+    } else {
+      this.props.createCleanup(this.state)
+    }
+
+  }
+
+  updateInput = ({ target: { name, value } }) => {
     this.setState({
       [name]: value
     })
@@ -27,13 +39,13 @@ class CleanupForm extends Component {
     const { title, date, city, venue, hostedBy } = this.state;
     return (
       <Segment>
-        <Form onSubmit={this.handleFormSubmit} autoComplete='off'>
+        <Form onSubmit={this.submitForm} autoComplete='off'>
           <Form.Field>
             <label>Cleanup Title</label>
             <input
               name='title'
               value={title}
-              onChange={this.handleInputChange}
+              onChange={this.updateInput}
               placeholder="Cleanup Title"
             />
           </Form.Field>
@@ -42,7 +54,7 @@ class CleanupForm extends Component {
             <input
               name='date'
               value={date}
-              onChange={this.handleInputChange}
+              onChange={this.updateInput}
               type="date" placeholder="Cleanup Date"
             />
           </Form.Field>
@@ -51,7 +63,7 @@ class CleanupForm extends Component {
             <input
               name='city'
               value={city}
-              onChange={this.handleInputChange}
+              onChange={this.updateInput}
               placeholder="City event is taking place"
             />
           </Form.Field>
@@ -60,7 +72,7 @@ class CleanupForm extends Component {
             <input
               name='venue'
               value={venue}
-              onChange={this.handleInputChange} placeholder="Enter the Venue of the event"
+              onChange={this.updateInput} placeholder="Enter the Venue of the event"
             />
           </Form.Field>
           <Form.Field>
@@ -68,7 +80,7 @@ class CleanupForm extends Component {
             <input
               name='hostedBy'
               value={hostedBy}
-              onChange={this.handleInputChange} placeholder="Enter the name of person hosting"
+              onChange={this.updateInput} placeholder="Enter the name of person hosting"
             />
           </Form.Field>
           <Button positive type="submit">Submit</Button>
