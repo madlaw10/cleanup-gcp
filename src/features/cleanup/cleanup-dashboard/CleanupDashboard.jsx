@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Grid, Button } from 'semantic-ui-react';
 import CleanupList from '../cleanup-list/CleanupList';
 import CleanupForm from '../cleanup-form/CleanupForm';
+import cuid from 'cuid';
 
 const cleanups = [
   {
@@ -54,21 +55,49 @@ const cleanups = [
   }
 ]
 
-
 class CleanupDashboard extends Component {
-    render() {
-        return (
-            <Grid>
-                <Grid.Column width={10}>
-                    <CleanupList cleanups={cleanups} />
-                </Grid.Column>
-                <Grid.Column width={6}>
-                    <Button positive content="Create Cleanup" />
-                    <CleanupForm />
-                </Grid.Column>
-            </Grid>
-        )
-    }
+  state = {
+    cleanups: cleanups,
+    isOpen: false
+  }
+
+  toggleIsOpen = () => {
+    this.setState(({ isOpen }) => ({
+      isOpen: !isOpen
+    }))
+  }
+
+  handleCreateCleanup = (newCleanup) => {
+    newCleanup.id = cuid();
+    newCleanup.hostPhotoURL = '/assets/user.png';
+    this.setState(({ cleanups }) => ({
+      cleanups: [...cleanups, newCleanup],
+      isOpen: false
+    }))
+  }
+
+  render() {
+    const { cleanups, isOpen } = this.state
+    return (
+      <Grid>
+        <Grid.Column width={10}>
+          <CleanupList cleanups={cleanups} />
+        </Grid.Column>
+        <Grid.Column width={6}>
+          <Button
+            onClick={this.toggleIsOpen}
+            positive
+            content="Create Cleanup"
+          />
+          {isOpen && (
+            <CleanupForm
+              createCleanup={this.handleCreateCleanup}
+              cancelForm={this.toggleIsOpen} />
+          )}
+        </Grid.Column>
+      </Grid>
+    )
+  }
 }
 
 export default CleanupDashboard;
