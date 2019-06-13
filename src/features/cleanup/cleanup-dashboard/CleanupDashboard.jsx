@@ -90,7 +90,7 @@ class CleanupDashboard extends Component {
     }))
   }
 
-  handledSelectCleanup = (cleanup) => {
+  handleSelectCleanup = (cleanup) => {
     this.setState({
       selectedCleanup: cleanup,
       isOpen: true
