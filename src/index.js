@@ -3,13 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './app/layout/App';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom';
 
 // Define the html element to be replaced
 const rootElement = document.getElementById('root');
 
 // Define the function to replace that html element with the application
 let render = () => {
-    ReactDOM.render(<App />, rootElement);
+    ReactDOM.render(
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>,
+        rootElement);
 }
 
 // Automatically update that application while running

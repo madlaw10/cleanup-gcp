@@ -62,12 +62,6 @@ class CleanupDashboard extends Component {
     selectedCleanup: null
   }
 
-  // toggleIsOpen = () => {
-  //   this.setState(({ isOpen }) => ({
-  //     isOpen: !isOpen
-  //   }))
-  // }
-
   handleOpenCleanupForm = () => {
     this.setState({
       isOpen: true,
