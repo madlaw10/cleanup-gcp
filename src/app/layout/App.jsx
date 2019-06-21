@@ -9,6 +9,7 @@ import UserDetailsPage from '../../features/user/user-details/UserDetailsPage';
 import NavBar from '../../features/nav/nav-bar/NavBar';
 import { Container } from 'semantic-ui-react';
 import { Route } from 'react-router-dom';
+import TestComponent from '../../features/test-area/TestComponent';
 
 class App extends Component {
   render() {
@@ -27,6 +28,7 @@ class App extends Component {
                 <Route path='/users' component={UsersDashboard} />
                 <Route path='/profile/:id' component={UserDetailsPage} />
                 <Route path='/settings' component={SettingsDashboard} />
+                <Route path='/test' component={TestComponent} />
               </Container>
             </Fragment>
           )}

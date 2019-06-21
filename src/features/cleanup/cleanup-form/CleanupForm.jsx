@@ -25,7 +25,6 @@ class CleanupForm extends Component {
     } else {
       this.props.createCleanup(this.state)
     }
-
   }
 
   updateInput = ({ target: { name, value } }) => {

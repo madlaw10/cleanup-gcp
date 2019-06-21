@@ -4,27 +4,29 @@ import './index.css';
 import App from './app/layout/App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { configureStore } from './app/store/configureStore';
 
-// Define the html element to be replaced
+const store = configureStore();
+
 const rootElement = document.getElementById('root');
 
-// Define the function to replace that html element with the application
 let render = () => {
     ReactDOM.render(
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>,
-        rootElement);
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>
+        , rootElement);
 }
 
-// Automatically update that application while running
 if (module.hot) {
     module.hot.accept('./app/layout/App', () => {
         setTimeout(render);
     })
 }
 
-// Render (duh!)
 render();
 
 // If you want your app to work offline and load faster, you can change
