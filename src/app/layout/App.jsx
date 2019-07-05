@@ -12,30 +12,30 @@ import { Route } from 'react-router-dom';
 import TestComponent from '../../features/test-area/TestComponent';
 
 class App extends Component {
-  render() {
-    return (
-      <Fragment>
-        <Route exact path='/' component={HomePage} />
-        <Route
-          path='/(.+)'
-          render={() => (
-            <Fragment>
-              <NavBar />
-              <Container className="main">
-                <Route path='/cleanups' component={CleanupDashboard} />
-                <Route path='/cleanups/:id' component={CleanupDetailsPage} />
-                <Route path='/createCleanup' component={CleanupForm} />
-                <Route path='/users' component={UsersDashboard} />
-                <Route path='/profile/:id' component={UserDetailsPage} />
-                <Route path='/settings' component={SettingsDashboard} />
-                <Route path='/test' component={TestComponent} />
-              </Container>
-            </Fragment>
-          )}
-        />
-      </Fragment>
-    );
-  }
+	render() {
+		return (
+			<Fragment>
+				<Route exact path='/' component={HomePage} />
+				<Route
+					path='/(.+)'
+					render={() => (
+						<Fragment>
+							<NavBar />
+							<Container className='main'>
+								<Route exact path='/cleanups' component={CleanupDashboard} />
+								<Route path='/cleanups/:id' component={CleanupDetailsPage} />
+								<Route path='/createCleanup' component={CleanupForm} />
+								<Route path='/users' component={UsersDashboard} />
+								<Route path='/profile/:id' component={UserDetailsPage} />
+								<Route path='/settings' component={SettingsDashboard} />
+								<Route path='/test' component={TestComponent} />
+							</Container>
+						</Fragment>
+					)}
+				/>
+			</Fragment>
+		);
+	}
 }
 
 export default App;

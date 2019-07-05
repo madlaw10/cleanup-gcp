@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const GeneralPage = () => {
-    return (
-        <div>
-            <h1>General</h1>
-        </div>
-    )
-}
+	return (
+		<div>
+			<h1>General</h1>
+		</div>
+	);
+};
 
-export default GeneralPage
+export default GeneralPage;
